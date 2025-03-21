@@ -3,13 +3,14 @@ import { useState } from 'react'
 import './App.css'
 import AddTask from './components/AddTask'
 import Tasks from './components/Tasks'
+import {v4} from 'uuid'
 
 function App() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
       title: "Estudar programação",
-      description: "Estrudar programção para se tornar um dev Full-Stack",
+      description: "Estudar programção para se tornar um dev Full-Stack",
       isCompleted: false
     },
     {
@@ -37,13 +38,23 @@ function App() {
     const newTasks = tasks.filter((task) => task.id !== id)
     setTasks(newTasks)
   }
+
+  const onAddTaskSubmit = (title, description) => {
+    const newTask = {
+      id: v4(),
+      title,
+      description,
+      isCompleted: false
+    }
+
+    setTasks([...tasks, newTask])
+  }
   
 
   return (
-   <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
+   <div className="w-screen h-screen bg-slate-500 flex justify-center items-center p-6">
     <div className="w-96 space-y-4">
-      <h1 className="text-3xl text-slate-100 font-bold text-center">Task Manager</h1>
-      <AddTask />
+      <AddTask onAddTaskSubmit = {onAddTaskSubmit}/>
       <Tasks tasks = {tasks} onTaskClick={onTaskClick} onDeleteClick={deleteTask} />
     </div>
    </div>
