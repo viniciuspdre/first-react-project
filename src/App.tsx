@@ -10,7 +10,7 @@ function App() {
     {
       id: 1,
       title: "Estudar programação",
-      description: "Estudar programção para se tornar um dev Full-Stack",
+      description: "Estudar programação para se tornar um dev Full-Stack",
       isCompleted: false
     },
     {
