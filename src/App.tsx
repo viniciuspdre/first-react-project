@@ -12,6 +12,20 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks))
   }, [tasks])
 
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5', {
+        method: 'GET'
+      })
+      const data = await response.json()
+      console.log(data)
+
+      setTasks(data)
+    }
+
+    fetchTasks()
+  }, []) // quando uso useEffect e utilizo uma lista vazia, ele so eh chamado quando inicio a aplicacao
+
   const onTaskClick = (id) => {
     const newTasks = tasks.map((task) => {
       return task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
